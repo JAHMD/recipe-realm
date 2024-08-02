@@ -1,7 +1,11 @@
-import Image from "next/image";
+import { appName } from "@/utils/flags";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: appName,
+	description: `${appName} is a A web app to save, organize, and share recipes.`,
+};
 
 export default function Home() {
-	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24"></main>
-	);
+	return <section className="container py-20">Home page</section>;
 }

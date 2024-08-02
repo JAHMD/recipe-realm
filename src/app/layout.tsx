@@ -1,8 +1,12 @@
+import Header from "@/layout/Header";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Croissant_One } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const croissantOne = Croissant_One({
+	subsets: ["latin"],
+	weight: "400",
+});
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -16,7 +20,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" className="dark">
-			<body className={inter.className}>{children}</body>
+			<body className={croissantOne.className}>
+			<Header />
+				<main className="">{children}</main>
+			</body>
 		</html>
 	);
 }
