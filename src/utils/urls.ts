@@ -3,4 +3,9 @@ export const urls = {
 		href: "/",
 		label: "Home",
 	},
+	recipes: {
+		href: "/recipes",
+		label: "Recipes",
+		view: (id: string) => `/recipes/${id}`,
+	},
 } as const;
