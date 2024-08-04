@@ -1,10 +1,10 @@
 import Header from "@/layout/Header";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
-import { Croissant_One } from "next/font/google";
+import { Montserrat, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const croissantOne = Croissant_One({
+const montserrat = Montserrat({
 	subsets: ["latin"],
 	weight: "400",
 });
@@ -22,7 +22,7 @@ export default function RootLayout({
 	return (
 		<ClerkProvider>
 			<html lang="en" className="dark">
-				<body className={croissantOne.className}>
+				<body className={montserrat.className}>
 					<Header />
 					<main className="">{children}</main>
 				</body>
