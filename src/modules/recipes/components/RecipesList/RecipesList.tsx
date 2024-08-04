@@ -1,8 +1,8 @@
-import { Recipe } from "../../utils/types";
+import { RecipeAlt } from "../../utils/types";
 import RecipeCard from "../RecipeCard";
 
 export type RecipesListProps = {
-	recipesList: Recipe[];
+	recipesList: RecipeAlt[];
 };
 
 export default function RecipesList({ recipesList }: RecipesListProps) {

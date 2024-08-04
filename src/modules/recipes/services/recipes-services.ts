@@ -1,11 +1,11 @@
 import { recipesList } from "@/utils/data";
-import { Recipe } from "../utils/types";
+import { RecipeAlt } from "../utils/types";
 
-export function getRecipes(): Recipe[] {
+export function getRecipes(): RecipeAlt[] {
 	return recipesList;
 }
 
-export function getRecipe(id: number | string): Recipe | undefined {
+export function getRecipe(id: number | string): RecipeAlt | undefined {
 	const recipe = recipesList.find((recipe) => recipe.id === id);
 
 	return recipe;
