@@ -1,3 +1,4 @@
+import ClerkLoadingContent from "@/components/ClerkLoadingAndLoaded/ClerkLoadingContent";
 import NavLinks from "@/components/NavLinks";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -30,14 +31,16 @@ export default function Header() {
 					{appName}
 				</Link>
 				<NavLinks />
-				<SignedOut>
-					<SignInButton>
-						<Button>Sign in</Button>
-					</SignInButton>
-				</SignedOut>
-				<SignedIn>
-					<UserButton />
-				</SignedIn>
+				<ClerkLoadingContent>
+					<SignedOut>
+						<SignInButton>
+							<Button className="font-bold">Sign in</Button>
+						</SignInButton>
+					</SignedOut>
+					<SignedIn>
+						<UserButton />
+					</SignedIn>
+				</ClerkLoadingContent>
 			</nav>
 		</header>
 	);
