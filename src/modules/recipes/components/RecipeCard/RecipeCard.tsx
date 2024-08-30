@@ -1,54 +1,89 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { urls } from "@/utils/urls";
+import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Expand, Loader2 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import { RecipeAlt } from "../../utils/types";
+import { useState } from "react";
+import { Recipe } from "../../utils/types";
 
 export type RecipeCardProps = {
-  recipe: RecipeAlt;
+  recipe: Recipe;
 };
 
 export default function RecipeCard({ recipe }: RecipeCardProps) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isDialogImageLoading, setIsDialogImageLoading] = useState(true);
+
   return (
-    <Card>
+    <Card className="overflow-hidden shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
       <CardContent className="p-0">
-        <Link
-          href={urls.recipes.view(recipe.id)}
-          className="relative block h-[200px] overflow-hidden"
-        >
-          <Image
-            src={recipe.image.url}
-            alt={`${recipe.title} image`}
-            width={600}
-            height={600}
-            className="w-full rounded-t-md object-cover"
-          />
-          <span className="absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-t from-background/80 to-transparent"></span>
-        </Link>
-        <div className="p-4">
-          <Link
-            href={urls.recipes.view(recipe.id)}
-            className="flex w-fit flex-col gap-2"
-          >
-            <CardTitle>{recipe.title}</CardTitle>
-            <CardDescription className="line-clamp-2 text-muted-foreground">
-              {recipe.description}
-            </CardDescription>
-          </Link>
-          <div className="mt-6 flex justify-between gap-2 text-sm text-muted-foreground">
-            <span>Cooking time: {recipe.cookingTime}</span>
-            {recipe.difficulty && (
-              <Badge className="capitalize">{recipe.difficulty}</Badge>
+        {/* Image with expand button */}
+        <div className="relative">
+          <div className="relative h-40 w-full bg-muted">
+            {isLoading && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
+              </div>
             )}
+            <Image
+              src={recipe.imageUrl}
+              alt={recipe.title}
+              layout="fill"
+              objectFit="cover"
+              onLoadingComplete={() => setIsLoading(false)}
+            />
+          </div>
+
+          <Dialog>
+            <DialogTrigger asChild>
+              <button className="absolute right-2 top-2 rounded-full bg-white p-1 shadow-md transition-all hover:bg-gray-100">
+                <Expand className="h-4 w-4 text-gray-600" />
+              </button>
+            </DialogTrigger>
+            <DialogContent className="h-[80vh] max-w-3xl">
+              <div className="relative h-full w-full overflow-hidden rounded-xl bg-muted">
+                {isDialogImageLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Loader2 className="h-10 w-10 animate-spin text-gray-400" />
+                  </div>
+                )}
+                <Image
+                  src={recipe.imageUrl}
+                  alt={recipe.title}
+                  layout="fill"
+                  objectFit="cover"
+                  onLoadingComplete={() => setIsDialogImageLoading(false)}
+                />
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
+
+        {/* Content */}
+        <div className="p-4">
+          {/* Title */}
+          <h2 className="text-lg font-semibold text-primary">{recipe.title}</h2>
+
+          {/* Difficulty and Cuisine */}
+          <div className="mb-4 mt-2 flex items-center justify-between text-sm text-gray-500">
+            <Badge className="capitalize">{recipe.difficulty}</Badge>
+            <span>{recipe.cuisine}</span>
+          </div>
+
+          {/* Nutrition */}
+          {recipe.nutrition && (
+            <div className="mb-4 text-xs text-gray-600">
+              <p>Calories: {recipe.nutrition.calories} kcal</p>
+              <p>Carbs: {recipe.nutrition.carbohydrates} g</p>
+            </div>
+          )}
+
+          {/* Prep and Cook Time */}
+          <div className="flex justify-between text-xs text-gray-500">
+            <span>Prep: {recipe.prepTime} mins</span>
+            <span>Cook: {recipe.cookTime} mins</span>
           </div>
         </div>
       </CardContent>
