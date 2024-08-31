@@ -1,4 +1,5 @@
 import Header from "@/layout/Header";
+import NexAuthSessionProvider from "@/providers/next-auth-session-provider";
 import type { Metadata } from "next";
 import { Montserrat, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
@@ -15,14 +16,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  session,
 }: Readonly<{
   children: React.ReactNode;
+  session: any;
 }>) {
   return (
     <html lang="en" className="dark">
       <body className={montserrat.className}>
-        <Header />
-        <main className="">{children}</main>
+        <NexAuthSessionProvider session={session}>
+          <Header />
+          <main className="h-[calc(100vh-86px)]">{children}</main>
+        </NexAuthSessionProvider>
       </body>
     </html>
   );

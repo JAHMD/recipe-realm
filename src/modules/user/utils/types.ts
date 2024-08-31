@@ -3,3 +3,12 @@ export type User = {
   name: string;
   favoriteRecipes: string[];
 };
+
+export type UserSession = {
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    image: string;
+  };
+};

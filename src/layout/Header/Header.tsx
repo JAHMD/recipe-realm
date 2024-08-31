@@ -1,8 +1,11 @@
+"use client";
+
 import NavLinks from "@/components/NavLinks";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { appName } from "@/utils/flags";
 import { urls } from "@/utils/urls";
+import { signOut, useSession } from "next-auth/react";
 import { Cookie } from "next/font/google";
 import Link from "next/link";
 
@@ -23,7 +26,16 @@ export default function Header() {
           {appName}
         </Link>
         <NavLinks />
+        <LogoutButton />
       </nav>
     </header>
   );
+}
+
+function LogoutButton() {
+  const { data: session } = useSession();
+
+  if (!session) return null;
+
+  return <Button onClick={() => signOut()}>logout</Button>;
 }
