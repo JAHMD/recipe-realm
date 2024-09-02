@@ -22,7 +22,7 @@ export default async function UserPage() {
 
   return (
     <section className="flex h-full">
-      <div className="h-full flex-1">
+      <div className="h-full flex-1 bg-muted">
         <Image
           src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?q=80&w=1910&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Colorful healthy food bowl"
@@ -32,8 +32,10 @@ export default async function UserPage() {
         />
       </div>
       <div className="flex flex-1 flex-col items-center justify-center">
-        <h2 className="text-center text-2xl font-bold">Recipe Realm</h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
+        <h2 className="text-center text-2xl font-bold text-white">
+          Recipe Realm
+        </h2>
+        <p className="mt-2 text-center text-sm text-muted-foreground">
           Discover, share, and create delicious recipes
         </p>
         <ProvidersSection providers={providers} />

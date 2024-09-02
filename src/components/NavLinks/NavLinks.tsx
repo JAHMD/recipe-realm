@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { urls } from "@/utils/urls";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -9,19 +10,19 @@ export default function NavLinks() {
 
   const navLinks = [
     {
-      href: "/",
-      label: "Home",
+      href: urls.home.href,
+      label: urls.home.label,
     },
     {
-      href: "/recipes",
-      label: "Recipes",
+      href: urls.recipes.href,
+      label: urls.recipes.label,
     },
     {
-      href: "/contact",
-      label: "Contact",
+      href: urls.contactUs.href,
+      label: urls.contactUs.label,
     },
     {
-      href: "/user",
+      href: urls.user.href,
       label: "User",
       private: false,
     },

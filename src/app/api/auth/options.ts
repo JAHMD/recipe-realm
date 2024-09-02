@@ -30,7 +30,7 @@ export const authOptions: AuthOptions = {
         session.user.id = uuidv4();
       }
 
-      console.log("session", session);
+      // console.log("session", session);
 
       return session;
     },

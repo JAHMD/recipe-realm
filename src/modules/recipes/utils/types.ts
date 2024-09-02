@@ -28,7 +28,7 @@ export type Rating = {
 
 // Define Recipe interface
 export type Recipe = {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   ingredients: Ingredient[];
@@ -43,7 +43,6 @@ export type Recipe = {
   imageUrl: string;
   tags?: string[]; // Optional field
   author?: Author; // Optional field
-  datePublished?: Date; // Optional field
-  rating?: Rating; // Optional field
+  _creationTime: number;
   videoUrl?: string; // Optional field
 };

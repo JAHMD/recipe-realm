@@ -1,31 +1,22 @@
-import { getRecipe } from "@/modules/recipes/services/recipes-services";
+import RecipeDetails from "@/modules/recipes/components/RecipeDetails";
 import { appName } from "@/utils/flags";
 import { Params } from "@/utils/types";
+import { Id } from "@convex/_generated/dataModel";
 import { Metadata } from "next";
-import React from "react";
 
 type RecipeDetailsPageProps = {
-	params: Params;
+  params: Params;
 };
 
-export const generateMetadata = ({ params }: { params: Params }): Metadata => {
-	const recipe = getRecipe(params.id);
-
-	if (!recipe) {
-		return {
-			title: "Unknown recipe",
-		};
-	}
-
-	return {
-		title: `${appName} | ${recipe.title}`,
-	};
+export const metadata: Metadata = {
+  title: `${appName} | Recipes`,
+  description: "Recipes listing page.",
 };
 
 export default function RecipeDetailsPage({ params }: RecipeDetailsPageProps) {
-	const recipe = getRecipe(params.id);
-
-	if (!recipe) return null;
-
-	return <section className="container py-20">{params.id}</section>;
+  return (
+    <section className="container py-10">
+      <RecipeDetails id={params.id as Id<"recipes">} />
+    </section>
+  );
 }

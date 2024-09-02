@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function HeroSection() {
   return (
     <section className="py-20 text-center">
-      <h1 className="mb-6 text-5xl font-bold">{appName}</h1>
+      <h1 className="mb-6 text-5xl font-bold text-white">{appName}</h1>
       <p className="mb-8 text-xl">
         Save, organize, and share your favorite recipes with ease.
       </p>

@@ -1,4 +1,5 @@
 import Header from "@/layout/Header";
+import { ConvexClientProvider } from "@/providers/ConvexClientProvider";
 import NexAuthSessionProvider from "@/providers/next-auth-session-provider";
 import type { Metadata } from "next";
 import { Montserrat, Plus_Jakarta_Sans } from "next/font/google";
@@ -25,8 +26,12 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={montserrat.className}>
         <NexAuthSessionProvider session={session}>
-          <Header />
-          <main className="h-[calc(100vh-86px)]">{children}</main>
+          <ConvexClientProvider>
+            <Header />
+            <main className="h-[calc(100vh-86px)] text-muted-foreground">
+              {children}
+            </main>
+          </ConvexClientProvider>
         </NexAuthSessionProvider>
       </body>
     </html>

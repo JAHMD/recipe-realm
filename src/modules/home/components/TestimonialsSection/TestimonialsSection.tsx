@@ -1,8 +1,8 @@
 function TestimonialCard({ quote, author }: { quote: string; author: string }) {
   return (
     <div className="rounded-lg border p-6 shadow-md">
-      <p className="mb-4 italic text-gray-600">{quote}</p>
-      <p className="font-semibold">- {author}</p>
+      <p className="mb-4 italic text-muted-foreground">{quote}</p>
+      <p className="font-semibold text-white">- {author}</p>
     </div>
   );
 }
@@ -10,7 +10,7 @@ function TestimonialCard({ quote, author }: { quote: string; author: string }) {
 export default function TestimonialsSection() {
   return (
     <section className="py-16">
-      <h2 className="mb-12 text-center text-3xl font-semibold">
+      <h2 className="mb-12 text-center text-3xl font-semibold text-white">
         What Our Users Say
       </h2>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">

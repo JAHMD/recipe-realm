@@ -6,7 +6,9 @@ import Link from "next/link";
 export default function CTASection() {
   return (
     <section className="py-20 text-center">
-      <h2 className="mb-4 text-3xl font-semibold">Ready to start cooking?</h2>
+      <h2 className="mb-4 text-3xl font-semibold text-white">
+        Ready to start cooking?
+      </h2>
       <p className="mb-8 text-xl text-muted-foreground">
         Join our community of food lovers today!
       </p>

@@ -16,6 +16,7 @@
     "@supabase/supabase-js": "^2.45.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "convex": "^1.15.0",
     "lucide-react": "^0.424.0",
     "next": "14.2.5",
     "next-auth": "^4.24.7",
