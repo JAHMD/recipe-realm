@@ -1,8 +1,10 @@
 // import prisma from "@/prisma";
+import { UserSession } from "@/modules/user/utils/types";
+import { api } from "@convex/_generated/api";
+import { fetchMutation, fetchQuery } from "convex/nextjs";
 import type { AuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import { v4 as uuidv4 } from "uuid";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -17,43 +19,46 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async session({ session }) {
-      //     const user = await prisma.user.findUnique({
-      //       where: { email: session?.user?.email },
-      //     });
-
-      //     session.user.image = user?.image || session?.user?.image;
-      //     session.user.id = user?.id.toString();
-      //     session.user.admin = user?.isAdmin || false;
-      //     session.user.owner = user?.isOwner || false;
-
       if (session.user) {
-        session.user.id = uuidv4();
-      }
+        const sessionUser = session.user as UserSession["user"];
 
-      // console.log("session", session);
+        const user = await fetchQuery(api.users.getUserByEmail, {
+          email: sessionUser.email,
+        });
+
+        if (sessionUser) {
+          sessionUser.image = user?.imageUrl || "";
+          sessionUser.id = user?._id?.toString() || "";
+          sessionUser.admin = !!user?.admin;
+          sessionUser.owner = !!user?.owner;
+        }
+
+        session.user = sessionUser;
+      }
 
       return session;
     },
     async signIn({ user }) {
-      //     try {
-      //       const storedUser = await prisma.user.findUnique({
-      //         where: { email: user?.email },
-      //       });
+      try {
+        const storedUser = await fetchQuery(api.users.getUserByEmail, {
+          email: user?.email ?? "",
+        });
 
-      //       if (!storedUser) {
-      //         await prisma.user.create({
-      //           data: {
-      //             email: user?.email,
-      //             name: user?.name,
-      //             image: user?.image,
-      //           },
-      //         });
-      //       }
+        if (!storedUser) {
+          await fetchMutation(api.users.createUser, {
+            email: user?.email ?? "",
+            name: user?.name ?? "",
+            imageUrl: user?.image ?? "",
+            admin: false,
+            owner: false,
+            favoriteRecipes: [],
+          });
+        }
 
-      return true;
-      //     } catch (error) {
-      //       return false;
-      //     }
+        return true;
+      } catch (error) {
+        return false;
+      }
     },
   },
 };

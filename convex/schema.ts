@@ -2,6 +2,14 @@ import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
 export default defineSchema({
+  users: defineTable({
+    name: v.string(),
+    email: v.string(),
+    imageUrl: v.string(),
+    admin: v.boolean(),
+    owner: v.boolean(),
+    favoriteRecipes: v.array(v.id("recipes")),
+  }),
   recipes: defineTable({
     author: v.object({
       name: v.string(),

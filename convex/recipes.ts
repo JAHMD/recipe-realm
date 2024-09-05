@@ -10,7 +10,9 @@ export const getRecipes = query({
 });
 
 export const getRecipe = query({
-  args: { id: v.id("recipes") },
+  args: {
+    id: v.id("recipes"),
+  },
   handler: async (ctx, args) => {
     const recipe = await ctx.db.get(args.id);
 

@@ -2,7 +2,7 @@ import ProvidersSection from "@/modules/user/components/ProvidersSection";
 import { UserSession } from "@/modules/user/utils/types";
 import { urls } from "@/utils/urls";
 import { getServerSession } from "next-auth";
-import { getProviders, signIn } from "next-auth/react";
+import { getProviders } from "next-auth/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { authOptions } from "../api/auth/options";

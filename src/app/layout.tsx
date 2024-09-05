@@ -2,7 +2,7 @@ import Header from "@/layout/Header";
 import { ConvexClientProvider } from "@/providers/ConvexClientProvider";
 import NexAuthSessionProvider from "@/providers/next-auth-session-provider";
 import type { Metadata } from "next";
-import { Montserrat, Plus_Jakarta_Sans } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 
 const montserrat = Montserrat({

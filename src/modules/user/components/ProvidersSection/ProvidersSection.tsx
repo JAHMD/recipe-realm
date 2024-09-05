@@ -31,11 +31,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 export default function ProvidersSection({ providers }: ProvidersSectionProps) {
   return (
     <div className="mt-8 space-y-6 font-medium">
-      {Object.values(providers || {}).map((provider) => (
+      {Object.values(providers || {}).map((provider, index) => (
         <>
           {provider.id === "google" && (
             <Button
-              key={provider.name}
+              key={index}
               onClick={() => signIn(provider.id)}
               className="flex w-full items-center justify-center gap-3 rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 transition duration-150 hover:bg-gray-200"
             >
@@ -45,7 +45,7 @@ export default function ProvidersSection({ providers }: ProvidersSectionProps) {
           )}
           {provider.id === "github" && (
             <Button
-              key={provider.name}
+              key={index}
               onClick={() => signIn(provider.id)}
               className="flex w-full items-center justify-center gap-3 rounded-lg bg-gray-900 px-4 py-2 text-white transition duration-150 hover:bg-gray-800"
             >
