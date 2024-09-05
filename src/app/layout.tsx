@@ -2,6 +2,7 @@ import Header from "@/layout/Header";
 import { ConvexClientProvider } from "@/providers/ConvexClientProvider";
 import NexAuthSessionProvider from "@/providers/next-auth-session-provider";
 import type { Metadata } from "next";
+import type { Session } from "next-auth";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 
@@ -20,7 +21,7 @@ export default function RootLayout({
   session,
 }: Readonly<{
   children: React.ReactNode;
-  session: any;
+  session: never;
 }>) {
   return (
     <html lang="en" className="dark">
