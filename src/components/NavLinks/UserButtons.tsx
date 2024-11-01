@@ -1,21 +1,17 @@
-"use client";
-
-import { urls } from "@/utils/urls";
 import { api } from "@convex/_generated/api";
+import { fetchQuery } from "convex/nextjs";
+
+import UserActionsButton from "@/modules/user/components/UserActionsButton";
 import { Id } from "@convex/_generated/dataModel";
-import { useQuery } from "convex/react";
-import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
-import { NavLink } from "./NavLinks";
 
 type UserButtonsProps = {
-  id: string;
+  id: Id<"users">;
 };
 
-export default function UserButtons({ id }: UserButtonsProps) {
-  const user = useQuery(api.users.getUser, {
-    id: id as Id<"users">,
-  });
+export default async function UserButtons({ id }: UserButtonsProps) {
+  const user = await fetchQuery(api.users.getUser, { id });
 
-  return user && <NavLink href={urls.user.view(id)} label={user.name} />;
+  if (!user) return null;
+
+  return <UserActionsButton user={user} />;
 }

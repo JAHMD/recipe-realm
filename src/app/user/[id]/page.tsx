@@ -1,13 +1,36 @@
 import { authOptions } from "@/app/api/auth/options";
 import { UserSession } from "@/modules/user/utils/types";
+import { appName } from "@/utils/flags";
+import { Params } from "@/utils/types";
 import { urls } from "@/utils/urls";
 import { api } from "@convex/_generated/api";
 import { Id } from "@convex/_generated/dataModel";
 import { fetchQuery } from "convex/nextjs";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import React from "react";
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> => {
+  const user = await fetchQuery(api.users.getUser, {
+    id: params.id as Id<"users">,
+  });
+
+  if (!user) {
+    return {
+      title: "User not found",
+    };
+  }
+
+  return {
+    title: `${appName} | ${user?.name}`,
+  };
+};
 
 export default async function ProfilePage() {
   const session = (await getServerSession(authOptions)) as UserSession;

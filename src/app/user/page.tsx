@@ -1,11 +1,17 @@
 import ProvidersSection from "@/modules/user/components/ProvidersSection";
 import { UserSession } from "@/modules/user/utils/types";
+import { appName } from "@/utils/flags";
 import { urls } from "@/utils/urls";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { getProviders } from "next-auth/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { authOptions } from "../api/auth/options";
+
+export const metadata: Metadata = {
+  title: `${appName} | Register`,
+};
 
 export default async function UserPage() {
   const session = (await getServerSession(authOptions)) as UserSession;

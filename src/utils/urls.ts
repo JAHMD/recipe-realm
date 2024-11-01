@@ -16,7 +16,11 @@ export const urls = {
     label: (user: User) => user.name,
   },
   contactUs: {
-    href: "contact-us",
+    href: "/contact-us",
     label: "Contact Us",
+  },
+  dashboard: {
+    href: "/dashboard",
+    label: "Dashboard",
   },
 } as const;

@@ -2,12 +2,15 @@
 
 import { cn } from "@/lib/utils";
 import { urls } from "@/utils/urls";
-import { api } from "@convex/_generated/api";
 import { Id } from "@convex/_generated/dataModel";
-import { useQuery } from "convex/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import UserButtons from "./UserButtons";
+
+type NavLinksProps = {
+  userId?: string;
+};
 
 type NavLinkProps = {
   href: string;
@@ -30,8 +33,7 @@ const navLinks = [
   },
 ];
 
-export default function NavLinks() {
-  const params = useParams();
+export default function NavLinks({ userId }: NavLinksProps) {
   const pathname = usePathname();
 
   return (
@@ -48,10 +50,10 @@ export default function NavLinks() {
           />
         );
       })}
-      {params.id ? (
-        <UserButtons id={params.id as string} />
+      {userId ? (
+        <UserButtons id={userId as Id<"users">} />
       ) : (
-        <NavLink href={urls.user.href} label="Username" />
+        <NavLink href={urls.user.href} label="Register" />
       )}
     </ul>
   );
